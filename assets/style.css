@@ -1,0 +1,313 @@
+/* Horkos - dark theme. Palette takes its cues from jw.org's dark mode
+   (slate blue on near-black) without reusing any Watchtower mark, wordmark
+   or logo: this site documents that organisation, it must never be
+   mistakable for it. */
+:root {
+    --bg:            #16181c;
+    --bg-raised:     #1e2126;
+    --bg-inset:      #24282e;
+    --border:        #32373f;
+    --border-strong: #414852;
+    --text:          #e3e6ea;
+    --text-muted:    #9aa2ad;
+    --text-faint:    #6e7681;
+    --accent:        #5b83c4;
+    --accent-dim:    #3f5c8c;
+    --removed:       #d98a8a;
+    --removed-bg:    #2a1e1e;
+    --added:         #86bd94;
+    --added-bg:      #1b2620;
+    --flag:          #d4a45c;
+    --max-width:     1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* --- masthead + nav --- */
+.masthead {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.masthead .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+.brand { display: flex; align-items: baseline; gap: 12px; }
+.brand .name {
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text);
+}
+.brand .name a { color: inherit; }
+.brand .name a:hover { text-decoration: none; color: var(--accent); }
+.brand .tagline {
+    font-size: 0.82rem;
+    color: var(--text-faint);
+}
+nav ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+nav a {
+    display: block;
+    padding: 7px 15px;
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+}
+nav a:hover { background: var(--bg-inset); color: var(--text); text-decoration: none; }
+nav a.active { background: var(--accent-dim); color: #fff; }
+
+/* --- page furniture --- */
+main { padding: 40px 0 72px; }
+h1 { font-size: 1.9rem; font-weight: 600; margin: 0 0 8px; letter-spacing: 0.01em; }
+h2 { font-size: 1.25rem; font-weight: 600; margin: 40px 0 12px; }
+.lede { color: var(--text-muted); margin: 0 0 32px; max-width: 68ch; }
+.prose { max-width: 68ch; }
+.prose p { margin: 0 0 18px; }
+
+.panel {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin: 0 0 28px;
+}
+
+.stats { display: flex; gap: 36px; flex-wrap: wrap; margin: 0 0 32px; }
+.stat .num { font-size: 1.6rem; font-weight: 600; color: var(--text); }
+.stat .label { font-size: 0.8rem; color: var(--text-faint); text-transform: uppercase;
+               letter-spacing: 0.07em; }
+
+/* --- change entries --- */
+.change {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 0 0 22px;
+    overflow: hidden;
+}
+.change-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-inset);
+}
+.change-title { font-size: 1.08rem; font-weight: 600; margin: 0 0 4px; }
+.change-pub { color: var(--text-muted); font-size: 0.9rem; }
+.change-pub .sym { color: var(--text-faint); }
+.change-meta { text-align: right; font-size: 0.84rem; color: var(--text-faint);
+               white-space: nowrap; }
+.change-meta .date { color: var(--text-muted); display: block; }
+
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 3px;
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+}
+.badge.sig-significant { border-color: var(--flag); color: var(--flag); }
+.badge.sig-notable     { border-color: var(--accent); color: var(--accent); }
+
+.change-body { padding: 6px 24px 20px; }
+
+.passage { border-top: 1px solid var(--border); padding: 18px 0 4px; }
+.passage:first-child { border-top: none; }
+.passage-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+}
+.passage ul { list-style: none; margin: 0 0 14px; padding: 0; }
+.passage li {
+    position: relative;
+    padding: 9px 14px 9px 34px;
+    margin: 0 0 6px;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+}
+.passage li::before {
+    position: absolute;
+    left: 12px;
+    top: 9px;
+    font-weight: 700;
+}
+.side-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 6px;
+}
+.before .side-label { color: var(--removed); }
+.after  .side-label { color: var(--added); }
+.before li { background: var(--removed-bg); border-left-color: var(--removed); }
+.before li::before { content: "\2212"; color: var(--removed); }
+.after  li { background: var(--added-bg); border-left-color: var(--added); }
+.after  li::before { content: "+"; color: var(--added); }
+.truncated { font-size: 0.8rem; color: var(--text-faint); font-style: italic; }
+
+.implications {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: var(--bg-inset);
+    border-left: 3px solid var(--accent-dim);
+    border-radius: 0 4px 4px 0;
+}
+.implications .imp-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+}
+.implications p { margin: 0; color: var(--text-muted); }
+.imp-draft {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+}
+
+.empty {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--text-muted);
+    border: 1px dashed var(--border-strong);
+    border-radius: 6px;
+}
+.empty .big { font-size: 1.15rem; color: var(--text); margin-bottom: 10px; }
+
+/* --- filters --- */
+.filters {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 0 0 24px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+.filter-group { display: flex; flex-direction: column; gap: 8px; }
+.filter-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 13px;
+    border-radius: 14px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.pill:hover { border-color: var(--accent); color: var(--text); }
+.pill[aria-pressed="true"] {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: #fff;
+}
+select.period {
+    background: var(--bg-inset);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+select.period:hover { border-color: var(--accent); }
+.filter-count {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    padding-bottom: 6px;
+}
+.no-match { display: none; }
+.no-match.show { display: block; }
+
+/* Without JavaScript the filter controls do nothing, so hide them rather
+   than present dead UI. Everything stays visible, which is the correct
+   degraded state for an archive. */
+.filters, .filter-count { display: none; }
+.js .filters { display: flex; }
+.js .filter-count { display: block; }
+
+.demo-banner {
+    background: #3a2e14;
+    border: 1px solid var(--flag);
+    color: #f0d9a8;
+    border-radius: 5px;
+    padding: 12px 18px;
+    margin: 0 0 28px;
+    font-size: 0.92rem;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0 40px;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+}
+footer p { margin: 0 0 8px; max-width: 78ch; }
+
+@media (max-width: 700px) {
+    .masthead .wrap { padding-top: 12px; padding-bottom: 12px; }
+    .change-head { flex-direction: column; }
+    .change-meta { text-align: left; white-space: normal; }
+    .stats { gap: 24px; }
+}
