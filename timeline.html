@@ -31,46 +31,44 @@
     <p class="lede">A chronological view spanning Watchtower&rsquo;s taught
        history of the world, from the JW-taught creation of Adam to today.
        Toggle between Watchtower&rsquo;s own chronology and the
-       historical-critical consensus, switch which packages of events are
-       shown, and click any event for a side-by-side comparison.</p>
+       historical-critical consensus, switch which tags are shown, and
+       click any event for a side-by-side comparison.</p>
 
     <div class="tl-toolbar">
-      <div class="tl-basis-toggle" role="group" aria-label="Date basis">
-        <button type="button" class="tl-basis-btn" data-basis="jw" aria-pressed="true">JW chronology</button>
-        <button type="button" class="tl-basis-btn" data-basis="historical" aria-pressed="false">Historical-critical</button>
+      <div class="tl-toolbar-row">
+        <div class="tl-basis-toggle" role="group" aria-label="Date basis">
+          <button type="button" class="tl-basis-btn" data-basis="jw" aria-pressed="true">JW chronology</button>
+          <button type="button" class="tl-basis-btn" data-basis="historical" aria-pressed="false">Historical-critical</button>
+        </div>
+        <div class="tl-zoom-controls">
+          <button type="button" id="tl-zoom-out" aria-label="Zoom out">&minus;</button>
+          <button type="button" id="tl-zoom-fit">Fit all</button>
+          <button type="button" id="tl-zoom-in" aria-label="Zoom in">+</button>
+        </div>
       </div>
-      <div class="tl-zoom-controls">
-        <button type="button" id="tl-zoom-out" aria-label="Zoom out">&minus;</button>
-        <button type="button" id="tl-zoom-fit">Fit all</button>
-        <button type="button" id="tl-zoom-in" aria-label="Zoom in">+</button>
-      </div>
-    </div>
-
-    <div class="filters">
-      <div class="filter-group">
-        <span class="filter-label" id="tl-pkg-label">Packages</span>
-        <div class="pills" id="tl-package-pills" role="group" aria-labelledby="tl-pkg-label"><button type="button" class="pill" data-tag="pre-israelite-history" aria-pressed="false" disabled title="No events in this package yet">Pre-Israelite history</button><button type="button" class="pill" data-tag="israelite-dynasties" aria-pressed="false" disabled title="No events in this package yet">Israelite dynasties</button><button type="button" class="pill" data-tag="jesus-life" aria-pressed="false" disabled title="No events in this package yet">Jesus&#x27; life</button><button type="button" class="pill" data-tag="watchtower-history" aria-pressed="true">Watchtower history</button></div>
-      </div>
+      <div class="tl-tags" id="tl-tag-pills" role="group" aria-label="Tags"><button type="button" class="tl-tag-pill" data-tag="pre-israelite-history" aria-pressed="false" style="--tag-color:hsl(150, 55%, 45%)" disabled title="No events with this tag yet">Pre-Israelite history</button><button type="button" class="tl-tag-pill" data-tag="israelite-dynasties" aria-pressed="false" style="--tag-color:hsl(280, 55%, 45%)" disabled title="No events with this tag yet">Israelite dynasties</button><button type="button" class="tl-tag-pill" data-tag="jesus-life" aria-pressed="false" style="--tag-color:hsl(45, 55%, 45%)" disabled title="No events with this tag yet">Jesus&#x27; life</button><button type="button" class="tl-tag-pill" data-tag="watchtower-history" aria-pressed="true" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</button></div>
     </div>
 
     <div class="tl-canvas-wrap" id="tl-canvas-wrap">
-      <svg id="tl-svg" viewBox="0 0 1000 200" preserveAspectRatio="none"></svg>
-      <div class="tl-tooltip" id="tl-tooltip" hidden></div>
+      <div class="tl-track" id="tl-track"></div>
     </div>
+
+    <div class="tl-detail-panel" id="tl-detail-panel" hidden></div>
+
+    <script type="application/json" id="tl-events-data">{"tags": [{"key": "pre-israelite-history", "label": "Pre-Israelite history", "color": "hsl(150, 55%, 45%)", "hasEvents": false, "parentKey": null}, {"key": "israelite-dynasties", "label": "Israelite dynasties", "color": "hsl(280, 55%, 45%)", "hasEvents": false, "parentKey": null}, {"key": "jesus-life", "label": "Jesus' life", "color": "hsl(45, 55%, 45%)", "hasEvents": false, "parentKey": null}, {"key": "watchtower-history", "label": "Watchtower history", "color": "hsl(214, 55%, 45%)", "hasEvents": true, "parentKey": null}], "events": [{"slug": "1879-zions-watch-tower", "title": "First issue of Zion's Watch Tower", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1879, "end": 1879, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Charles Taze Russell, who had led a small Bible study group in Allegheny, Pennsylvania since the early 1870s, launched Zion's Watch Tower and Herald of Christ's Presence in July 1879 as the vehicle for sharing his Bible-based conclusions about Christ's return and the “last days.”", "links": [{"label": "Their Modern Development and Growth", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101989001"}]}, "historical": {"summary": "Historians trace the magazine to Russell's break from Adventist writer Nelson Barbour and his own chronological speculation about 1874 and 1914. It is the direct ancestor of today's Watchtower magazine.", "links": [{"label": "The Watchtower — Wikipedia", "url": "https://en.wikipedia.org/wiki/The_Watchtower"}]}}, {"slug": "1881-1884-tract-society-incorporated", "title": "Zion's Watch Tower Tract Society founded and incorporated", "importance": 3, "tags": ["watchtower-history"], "date": {"start": 1881, "end": 1884, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "The informal tract society organized in 1881 was legally incorporated in Pennsylvania in 1884, with Russell as president, giving the preaching and publishing work a stable legal footing independent of any one person's life.", "links": [{"label": "Their Modern Development and Growth", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101989001"}]}, "historical": {"summary": "Historians describe the corporate structure as a practical response to Russell's rapidly growing literature-distribution enterprise. This Pennsylvania corporation is the direct legal ancestor of today's Watch Tower Bible and Tract Society of Pennsylvania.", "links": [{"label": "Watch Tower Bible and Tract Society of Pennsylvania — Wikipedia", "url": "https://en.wikipedia.org/wiki/Watch_Tower_Bible_and_Tract_Society_of_Pennsylvania"}]}}, {"slug": "1914-appointed-times-fulfilled", "title": "1914 taught as the end of “the Gentile Times”", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1914, "end": 1914, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Based on a chronology beginning with Jerusalem's fall in 607 B.C.E. and a 2,520-year “seven times” period from Daniel 4, Bible Students taught 1914 would mark the end of “the appointed times of the nations” and Christ's installation as heavenly King - an event they hold the outbreak of world war and other calamity confirmed.", "links": [{"label": "“1914 — A Significant Year in Bible Prophecy”", "url": "https://wol.jw.org/en/wol/pc/r1/lp-e/2007006/0/0"}]}, "historical": {"summary": "Russell had originally taught 1914 would bring visible Armageddon and the overthrow of earthly governments; when this failed to occur, the teaching was reinterpreted after the fact as marking Christ's invisible enthronement. The underlying 1874/1914 chronology traces to Adventist writer Nelson H. Barbour, and mainstream Assyriology rejects the 607 B.C.E. date, placing Jerusalem's fall at 586/587 B.C.E.", "links": [{"label": "Eschatology of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Eschatology_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1916-1917-russell-death-rutherford-succession", "title": "Russell's death and the Rutherford succession crisis", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1916, "end": 1917, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Russell died on October 31, 1916. Joseph F. Rutherford, the Society's legal counsel, was elected president in January 1917 and continued the preaching work, introducing the companion magazine The Golden Age.", "links": [{"label": "A Time of Testing (1914-1918)", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101993007"}]}, "historical": {"summary": "Rutherford's election triggered an acrimonious dispute with four of the Society's seven directors, who accused him of overstepping his authority; Rutherford had them legally removed and replaced. The conflict, compounded by publication of The Finished Mystery, split the movement - an estimated one-seventh of Bible Students left by 1919, founding splinter groups (the Pastoral Bible Institute, the Laymen's Home Missionary Movement) that still exist.", "links": [{"label": "Watch Tower Society presidency dispute — Wikipedia", "url": "https://en.wikipedia.org/wiki/Watch_Tower_Society_presidency_dispute"}]}}, {"slug": "1917-1919-finished-mystery-sedition", "title": "The Finished Mystery and Rutherford's sedition conviction", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1917, "end": 1919, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower literature frames the 1918 arrest and imprisonment of Rutherford and seven associates as religious persecution tied to their neutral, anti-war Bible preaching amid wartime hysteria; their convictions were reversed on appeal.", "links": [{"label": "A Time of Testing (1914-1918)", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101993007"}]}, "historical": {"summary": "The Finished Mystery (1917) predicted God would destroy Christendom's churches “wholesale” in 1918 and all governments by 1920, a prediction that failed. Separately, Rutherford and seven directors were convicted under the Espionage Act in June 1918 for allegedly obstructing military recruitment through the book's content, sentenced to 20 years, served roughly nine months at Atlanta, and had the conviction reversed on appeal in 1919 for an unfair trial.", "links": [{"label": "Joseph Franklin Rutherford — Wikipedia", "url": "https://en.wikipedia.org/wiki/Joseph_Franklin_Rutherford"}]}}, {"slug": "1925-millions-now-living", "title": "“Millions Now Living Will Never Die” and the 1925 failure", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1925, "end": 1925, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Rutherford's widely publicized 1918-1920 message held that the “generation” alive in 1914 would witness the resurrection of faithful Old Testament figures - Abraham, Isaac, Jacob - to earth and the start of paradise conditions, expected around 1925.", "links": [{"label": "“Millions Now Living Will Never Die” discourse", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1200273841"}]}, "historical": {"summary": "1925 passed with no resurrection or paradise; the failure caused significant defections and public ridicule. The Society had built a mansion (“Beth Sarim”) in San Diego in anticipation of the patriarchs' return, which Rutherford himself lived in until his death. It is one of the most-documented failed predictions in the movement's history.", "links": [{"label": "Eschatology of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Eschatology_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1931-name-jehovahs-witnesses", "title": "Adoption of the name “Jehovah's Witnesses”", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1931, "end": 1931, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "At a Columbus, Ohio convention on July 26, 1931, Rutherford presented a resolution, based on Isaiah 43:10-12, adopting “Jehovah's witnesses” as the group's distinguishing name, intended to unify identity and separate the group from other Bible Student offshoots.", "links": [{"label": "Their Modern Development and Growth", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101989001"}]}, "historical": {"summary": "Historians view the name change as both a doctrinal statement and an organizational consolidation move by Rutherford, cementing his authority after the 1917 split by giving loyalists a distinct identity separate from independent Bible Student groups that had broken away.", "links": [{"label": "History of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/History_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1940-1943-flag-salute-gobitis-barnette", "title": "Flag-salute refusal and the Supreme Court reversal", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1940, "end": 1943, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower literature presents Witness children's refusal to salute national flags, viewed as a form of image worship inconsistent with Christian neutrality, as a principled stand that - after initial legal defeat - was vindicated when the U.S. Supreme Court reversed itself and affirmed Witnesses' free-exercise and free-speech rights.", "links": [{"label": "“Defending and Legally Establishing the Good News”", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101993041"}]}, "historical": {"summary": "In Minersville School District v. Gobitis (1940) the Court upheld compulsory flag salutes 8-1; amid a wave of mob violence against Witnesses nationwide following that ruling, the Court reversed itself three years later in West Virginia State Board of Education v. Barnette (1943), a landmark First Amendment ruling still cited for the principle that government cannot compel speech or belief.", "links": [{"label": "West Virginia State Board of Education v. Barnette — Wikipedia", "url": "https://en.wikipedia.org/wiki/West_Virginia_State_Board_of_Education_v._Barnette"}]}}, {"slug": "1942-rutherford-death-knorr-succession", "title": "Rutherford's death and Knorr's succession", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1942, "end": 1942, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Rutherford died on January 8, 1942. Nathan H. Knorr was elected president days later and initiated intensive training programs - notably the Gilead missionary school in 1943 - that expanded the preaching work internationally.", "links": [{"label": "Declaring the Good News Without Letup (1942-1975)", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101993009"}]}, "historical": {"summary": "Knorr's tenure is described by historians as shifting the organization from Russell/Rutherford-style singular charismatic leadership toward corporate, systematized management, including standardized theocratic schools and the 1950 New World Translation project, largely the work of Frederick Franz.", "links": [{"label": "Nathan Knorr — Wikipedia", "url": "https://en.wikipedia.org/wiki/Nathan_Knorr"}]}}, {"slug": "1945-blood-transfusion-policy", "title": "Blood transfusion policy adopted", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1945, "end": 1945, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watch Tower literature holds that Genesis 9:4, Leviticus 17 and Acts 15's command to “abstain from blood” apply to transfusion as well as ingestion, making blood transfusion of whole blood or its primary components a serious sin to be refused even in life-threatening situations, with some specifics left to individual conscience.", "links": [{"label": "Jehovah's Witnesses and the Question of Blood", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101977010"}]}, "historical": {"summary": "Neither Russell nor Rutherford had addressed transfusion; the prohibition emerged in 1944-1945 Watchtower articles under Knorr as transfusion became common medical practice, and was enforced via disfellowshipping from 1961 onward. Bioethicists and physicians have documented resulting patient deaths and the policy's later partial softening, including permitting some blood fractions and cell salvage from the 2000s.", "links": [{"label": "Jehovah's Witnesses and blood transfusions — Wikipedia", "url": "https://en.wikipedia.org/wiki/Jehovah%27s_Witnesses_and_blood_transfusions"}]}}, {"slug": "1950s-2016-higher-education-discouragement", "title": "Higher education discouragement policy", "importance": 3, "tags": ["watchtower-history"], "date": {"start": 1950, "end": 2016, "circa": true}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower literature has for decades counseled young Witnesses to weigh “additional education” carefully against spiritual goals and full-time ministry, citing concerns about worldly influence, debt, and time cost, while stating the decision ultimately rests with the individual or family.", "links": [{"label": "Make Wise Decisions Regarding Additional Education", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/2026402"}]}, "historical": {"summary": "Independent researchers and journalists document decades of much stronger discouragement of university education specifically. The 2008 Pew U.S. Religious Landscape Survey found Jehovah's Witnesses had the lowest rate of four-year college completion of any major U.S. religious group, a finding commentators have tied directly to this teaching.", "links": [{"label": "Pew Research Center: A closer look at Jehovah's Witnesses", "url": "https://www.pewresearch.org/short-reads/2016/04/26/a-closer-look-at-jehovahs-witnesses-living-in-the-u-s/"}]}}, {"slug": "1952-disfellowshipping-shunning-policy", "title": "Disfellowshipping and shunning formalized", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1952, "end": 1952, "circa": true}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower teaching frames shunning of unrepentant serious wrongdoers - including baptized family members - as a loving, scripturally based provision meant to protect congregation purity and motivate repentance, not as punishment. The term was changed from “disfellowshipping” to “removal from the congregation” in 2024.", "links": [{"label": "Why Disfellowshipping Is a Loving Provision", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/2015287"}, {"label": "“Removal From the Congregation” (2024 terminology change)", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1200271695"}]}, "historical": {"summary": "The modern shunning practice, including shunning of family members within the same household, is generally traced to a 1952 Watchtower article; prior practice withdrew a wrongdoer from “special fellowship” without full social shunning. Sociologists studying high-control groups cite JW shunning, including of minor children by parents, as a significant source of documented psychological harm.", "links": [{"label": "Jehovah's Witnesses congregational discipline — Wikipedia", "url": "https://en.wikipedia.org/wiki/Jehovah%27s_Witnesses_congregational_discipline"}]}}, {"slug": "1967-1980-organ-transplant-policy", "title": "Organ transplant policy: ban, then reversal", "importance": 3, "tags": ["watchtower-history"], "date": {"start": 1967, "end": 1980, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "The November 15, 1967 Watchtower called organ and tissue transplantation a form of “cannibalism” and grounds for disfellowshipping. A March 15, 1980 “Questions From Readers” article stated transplantation is not directly addressed by Scripture and is therefore left to each Witness's own conscientious decision, superseding the earlier position.", "links": [{"label": "Questions From Readers, March 15, 1980", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1980212"}]}, "historical": {"summary": "The reversal is well documented in the primary-source Watchtower issues themselves; independent academic or mainstream-journalism coverage specifically narrating this policy history is comparatively thin, with most detailed secondary accounts appearing on advocacy or critic sites rather than peer-reviewed sources.", "links": []}}, {"slug": "1975-prediction-and-aftermath", "title": "The 1975 prediction and its aftermath", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1975, "end": 1975, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "From the mid-1960s, based on a calculation of 6,000 years of human existence since Adam's creation ending in the fall of 1975, Watchtower publications suggested the start of Christ's millennial reign could align with that date, later characterizing this as implication rather than firm prediction.", "links": []}, "historical": {"summary": "The unfulfilled expectation caused a documented surge and then collapse in conversion and baptism rates through the late 1970s - roughly one in five Bible studies led to baptism before 1975, versus far lower rates after - along with significant membership attrition and a rare organizational acknowledgment in Watchtower literature of having “erred in setting dates.”", "links": [{"label": "Eschatology of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Eschatology_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1976-governing-body-reorganization", "title": "The 1976 Governing Body reorganization", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1976, "end": 1976, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Effective January 1, 1976, administrative authority previously concentrated in the Society president was redistributed to the Governing Body, operating through six committees, described in Watchtower history as one of the most significant organizational readjustments in the religion's modern history.", "links": [{"label": "Their Modern Development and Growth", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101989001"}]}, "historical": {"summary": "Scholars characterize this as a deliberate move, with Knorr's declining health a factor, away from single-leader control toward a plural, committee-based leadership model - though critics note the Governing Body's membership and decision-making remain largely opaque and self-perpetuating.", "links": [{"label": "Governing Body of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Governing_Body_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1977-knorr-death-franz-governing-body", "title": "Knorr's death and the Franz-era Governing Body", "importance": 3, "tags": ["watchtower-history"], "date": {"start": 1977, "end": 1977, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Knorr died in 1977, shortly after helping implement the 1976 Governing Body enlargement. Frederick Franz became president, with day-to-day authority now formally resting in the Governing Body rather than any single office.", "links": [{"label": "Their Modern Development and Growth", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1101989001"}]}, "historical": {"summary": "Historians, and former insider Raymond Franz (Frederick's nephew), describe this period as one of intense internal doctrinal debate at headquarters - over the 1975 fallout, “generation” chronology, and disfellowshipping policy - that culminated in the 1980 crisis that followed.", "links": [{"label": "Governing Body of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Governing_Body_of_Jehovah%27s_Witnesses"}]}}, {"slug": "1980-1981-raymond-franz-crisis", "title": "Raymond Franz and the 1980 Governing Body doctrinal crisis", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1980, "end": 1981, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower literature of the period frames the removal of dissenting individuals from headquarters positions - including a September 1980 letter stating that persistently holding unauthorized personal doctrinal views could itself warrant judicial action - as necessary protection of the congregation's doctrinal unity.", "links": []}, "historical": {"summary": "Raymond Franz, a Governing Body member since 1971, was questioned for hours in May 1980 over private doctrinal disagreements, pressured to resign, and disfellowshipped in November 1981 for having dinner with a disassociated former member. His account (Crisis of Conscience) and independent historians treat this as the pivotal event exposing internal dissent and consolidating doctrinal control at headquarters.", "links": [{"label": "Raymond Franz — Wikipedia", "url": "https://en.wikipedia.org/wiki/Raymond_Franz"}]}}, {"slug": "1992-2001-un-ngo-affiliation", "title": "UN NGO affiliation and its exposure", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 1992, "end": 2001, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower's official teaching holds the United Nations to be an illegitimate, doomed institution - the “scarlet-colored wild beast” of Revelation - which is precisely the theological position that made the organization's own 1992-2001 NGO affiliation controversial once it was revealed.", "links": [{"label": "“The United Nations — A Better Way?” (general doctrinal position; does not address the NGO affiliation itself)", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/101991643"}]}, "historical": {"summary": "The Watch Tower Society of New York held Associate NGO status with the UN Department of Public Information from February 1992 until October 2001, reportedly to access the UN library. The Guardian broke the story on October 8, 2001; the Society requested termination of the association within days. The episode is widely cited as a major hypocrisy scandal given decades of Watchtower condemnation of the UN.", "links": [{"label": "Jehovah's Witnesses and the United Nations — Wikipedia", "url": "https://en.wikipedia.org/wiki/Jehovah%27s_Witnesses_and_the_United_Nations"}, {"label": "The Guardian, October 8, 2001", "url": "https://www.theguardian.com/uk/2001/oct/08/religion.world"}]}}, {"slug": "1995-generation-teaching-change", "title": "The “generation” teaching change of 1995", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 1995, "end": 1995, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "The November 1, 1995 Watchtower explained that “generation” at Matthew 24:34 does not refer to a literal, measurable lifespan tied to 1914, but rather to “the peoples of the earth” who see the sign but do not mend their ways - removing the previous link to a calculable end date.", "links": [{"label": "1914 — The Generation That Will Not Pass Away", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1984361"}]}, "historical": {"summary": "This was at least the fourth revision of the “generation” teaching since the 1940s, having moved from a roughly 40-year period, to a full lifetime, to those merely “aware” of 1914 events; scholars view it as a response to the aging-out of anyone who could plausibly remember 1914 as an adult.", "links": [{"label": "Eschatology of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Eschatology_of_Jehovah%27s_Witnesses"}]}}, {"slug": "2000-2001-corporate-restructuring", "title": "Corporate restructuring: Christian Congregation of Jehovah's Witnesses", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 2000, "end": 2001, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "A January 2001 Watchtower/Kingdom Ministry announcement explained that the Governing Body had approved new corporate entities - Christian Congregation of Jehovah's Witnesses, Kingdom Support Services, and the Religious Order of Jehovah's Witnesses - to better handle the diversity and scope of the work, alongside the existing Pennsylvania and New York Watch Tower corporations.", "links": [{"label": "New Corporations Formed", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/202002009"}]}, "historical": {"summary": "Religion journalists reported this as a governance shakeup amid a broader membership growth slowdown - annual baptisms fell from roughly 50,000 in 1988 to 30,000 in 2000. President Milton Henschel and six directors resigned on October 7, 2000, replaced by figures outside the Governing Body, decoupling corporate officer roles from Governing Body membership - read by observers as both a liability-management and succession-planning move.", "links": [{"label": "Christianity Today: “Sects: Watch Tower Undergoes Corporate Shakeup”", "url": "https://www.christianitytoday.com/2001/03/sects-watch-tower-undergoes-corporate-shakeup/"}]}}, {"slug": "2002-two-witness-rule-abuse-reporting", "title": "The two-witness rule and child sexual abuse policy", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 2002, "end": 2002, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "Watchtower policy requires two witnesses, or a confession, before congregational judicial action can be taken against an accused wrongdoer, per 2 Corinthians 13:1 and Deuteronomy 19:15. A 2002 Office of Public Information statement said elders should report abuse allegations to authorities where required by law, regardless of the two-witness standard used for internal discipline.", "links": [{"label": "Love and Justice in the Face of Wickedness", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/2019405"}]}, "historical": {"summary": "Independent investigations - courts, royal commissions, journalism - have found the two-witness rule, applied to internal discipline, effectively shields sole-perpetrator abusers from meaningful congregational consequence and has been used in ways that discourage victims from reporting to police. Numerous civil lawsuits and criminal cases globally have centered on this policy and on non-reporting by elders.", "links": [{"label": "Jehovah's Witnesses' handling of child sexual abuse — Wikipedia", "url": "https://en.wikipedia.org/wiki/Jehovah%27s_Witnesses%27_handling_of_child_sexual_abuse"}]}}, {"slug": "2010-overlapping-generations", "title": "The “overlapping generations” teaching of 2010", "importance": 4, "tags": ["watchtower-history"], "date": {"start": 2010, "end": 2010, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "The April 15, 2010 Watchtower introduced the “overlapping generations” understanding: two overlapping groups of anointed Christians - those alive in 1914 and those alive later whose lives overlapped with the first group - together constitute “this generation,” allowing the teaching to extend well past 1914 without a fixed termination date.", "links": [{"label": "1914 — The Generation That Will Not Pass Away", "url": "https://wol.jw.org/en/wol/d/r1/lp-e/1984361"}]}, "historical": {"summary": "Critics and former members note this represents a reversal of the 1995 change, which had explicitly abandoned tying “generation” to any specific overlapping-lifespan calculation, and effectively re-introduces an openly elastic, unfalsifiable timeframe.", "links": [{"label": "Eschatology of Jehovah's Witnesses — Wikipedia", "url": "https://en.wikipedia.org/wiki/Eschatology_of_Jehovah%27s_Witnesses"}]}}, {"slug": "2015-2017-australian-royal-commission", "title": "Australian Royal Commission findings", "importance": 5, "tags": ["watchtower-history"], "date": {"start": 2015, "end": 2017, "circa": false}, "dateJw": null, "dateHistorical": null, "jw": {"summary": "The organization's submissions to the Commission maintained that its child-safeguarding policies are scripturally grounded and adequate, while stating that abuse is treated as a serious sin.", "links": []}, "historical": {"summary": "Australia's Royal Commission into Institutional Responses to Child Sexual Abuse held public hearings on Jehovah's Witnesses (Case Study 29) in mid-2015, examining case files involving 1,006 alleged perpetrators within the Australian organization and finding that not one had ever been reported by the organization to police. It concluded children were not adequately protected and recommended abandoning the two-witness rule in child sexual abuse cases.", "links": [{"label": "Case Study 29: Jehovah's Witnesses — Royal Commission", "url": "https://www.childabuseroyalcommission.gov.au/case-studies/case-study-29-jehovahs-witnesses"}]}}]}</script>
 
     <ol class="tl-list" id="tl-list">
     <li>
-      <details class="tl-event" id="1879-zions-watch-tower"
+      <details class="tl-event" id="tl-ev-1879-zions-watch-tower"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1879" data-end="1879"
                data-jw-start="1879" data-jw-end="1879"
                data-hist-start="1879" data-hist-end="1879">
         <summary>
           <span class="tl-event-date">1879</span>
           <span class="tl-event-title">First issue of Zion&#x27;s Watch Tower</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -87,17 +85,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1881-1884-tract-society-incorporated"
+      <details class="tl-event" id="tl-ev-1881-1884-tract-society-incorporated"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="3"
                data-start="1881" data-end="1884"
                data-jw-start="1881" data-jw-end="1884"
                data-hist-start="1881" data-hist-end="1884">
         <summary>
           <span class="tl-event-date">1881–1884</span>
           <span class="tl-event-title">Zion&#x27;s Watch Tower Tract Society founded and incorporated</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -114,17 +111,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1914-appointed-times-fulfilled"
+      <details class="tl-event" id="tl-ev-1914-appointed-times-fulfilled"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1914" data-end="1914"
                data-jw-start="1914" data-jw-end="1914"
                data-hist-start="1914" data-hist-end="1914">
         <summary>
           <span class="tl-event-date">1914</span>
           <span class="tl-event-title">1914 taught as the end of “the Gentile Times”</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -141,17 +137,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1916-1917-russell-death-rutherford-succession"
+      <details class="tl-event" id="tl-ev-1916-1917-russell-death-rutherford-succession"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1916" data-end="1917"
                data-jw-start="1916" data-jw-end="1917"
                data-hist-start="1916" data-hist-end="1917">
         <summary>
           <span class="tl-event-date">1916–1917</span>
           <span class="tl-event-title">Russell&#x27;s death and the Rutherford succession crisis</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -168,17 +163,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1917-1919-finished-mystery-sedition"
+      <details class="tl-event" id="tl-ev-1917-1919-finished-mystery-sedition"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="1917" data-end="1919"
                data-jw-start="1917" data-jw-end="1919"
                data-hist-start="1917" data-hist-end="1919">
         <summary>
           <span class="tl-event-date">1917–1919</span>
           <span class="tl-event-title">The Finished Mystery and Rutherford&#x27;s sedition conviction</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -195,17 +189,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1925-millions-now-living"
+      <details class="tl-event" id="tl-ev-1925-millions-now-living"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1925" data-end="1925"
                data-jw-start="1925" data-jw-end="1925"
                data-hist-start="1925" data-hist-end="1925">
         <summary>
           <span class="tl-event-date">1925</span>
           <span class="tl-event-title">“Millions Now Living Will Never Die” and the 1925 failure</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -222,17 +215,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1931-name-jehovahs-witnesses"
+      <details class="tl-event" id="tl-ev-1931-name-jehovahs-witnesses"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1931" data-end="1931"
                data-jw-start="1931" data-jw-end="1931"
                data-hist-start="1931" data-hist-end="1931">
         <summary>
           <span class="tl-event-date">1931</span>
           <span class="tl-event-title">Adoption of the name “Jehovah&#x27;s Witnesses”</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -249,17 +241,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1940-1943-flag-salute-gobitis-barnette"
+      <details class="tl-event" id="tl-ev-1940-1943-flag-salute-gobitis-barnette"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="1940" data-end="1943"
                data-jw-start="1940" data-jw-end="1943"
                data-hist-start="1940" data-hist-end="1943">
         <summary>
           <span class="tl-event-date">1940–1943</span>
           <span class="tl-event-title">Flag-salute refusal and the Supreme Court reversal</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -276,17 +267,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1942-rutherford-death-knorr-succession"
+      <details class="tl-event" id="tl-ev-1942-rutherford-death-knorr-succession"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="1942" data-end="1942"
                data-jw-start="1942" data-jw-end="1942"
                data-hist-start="1942" data-hist-end="1942">
         <summary>
           <span class="tl-event-date">1942</span>
           <span class="tl-event-title">Rutherford&#x27;s death and Knorr&#x27;s succession</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -303,17 +293,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1945-blood-transfusion-policy"
+      <details class="tl-event" id="tl-ev-1945-blood-transfusion-policy"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1945" data-end="1945"
                data-jw-start="1945" data-jw-end="1945"
                data-hist-start="1945" data-hist-end="1945">
         <summary>
           <span class="tl-event-date">1945</span>
           <span class="tl-event-title">Blood transfusion policy adopted</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -330,17 +319,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1950s-2016-higher-education-discouragement"
+      <details class="tl-event" id="tl-ev-1950s-2016-higher-education-discouragement"
                data-tags="watchtower-history"
                data-circa="1"
-               data-importance="3"
                data-start="1950" data-end="2016"
                data-jw-start="1950" data-jw-end="2016"
                data-hist-start="1950" data-hist-end="2016">
         <summary>
           <span class="tl-event-date">c. 1950–2016</span>
           <span class="tl-event-title">Higher education discouragement policy</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -357,17 +345,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1952-disfellowshipping-shunning-policy"
+      <details class="tl-event" id="tl-ev-1952-disfellowshipping-shunning-policy"
                data-tags="watchtower-history"
                data-circa="1"
-               data-importance="4"
                data-start="1952" data-end="1952"
                data-jw-start="1952" data-jw-end="1952"
                data-hist-start="1952" data-hist-end="1952">
         <summary>
           <span class="tl-event-date">c. 1952</span>
           <span class="tl-event-title">Disfellowshipping and shunning formalized</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -384,17 +371,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1967-1980-organ-transplant-policy"
+      <details class="tl-event" id="tl-ev-1967-1980-organ-transplant-policy"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="3"
                data-start="1967" data-end="1980"
                data-jw-start="1967" data-jw-end="1980"
                data-hist-start="1967" data-hist-end="1980">
         <summary>
           <span class="tl-event-date">1967–1980</span>
           <span class="tl-event-title">Organ transplant policy: ban, then reversal</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -411,17 +397,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1975-prediction-and-aftermath"
+      <details class="tl-event" id="tl-ev-1975-prediction-and-aftermath"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1975" data-end="1975"
                data-jw-start="1975" data-jw-end="1975"
                data-hist-start="1975" data-hist-end="1975">
         <summary>
           <span class="tl-event-date">1975</span>
           <span class="tl-event-title">The 1975 prediction and its aftermath</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -438,17 +423,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1976-governing-body-reorganization"
+      <details class="tl-event" id="tl-ev-1976-governing-body-reorganization"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="1976" data-end="1976"
                data-jw-start="1976" data-jw-end="1976"
                data-hist-start="1976" data-hist-end="1976">
         <summary>
           <span class="tl-event-date">1976</span>
           <span class="tl-event-title">The 1976 Governing Body reorganization</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -465,17 +449,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1977-knorr-death-franz-governing-body"
+      <details class="tl-event" id="tl-ev-1977-knorr-death-franz-governing-body"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="3"
                data-start="1977" data-end="1977"
                data-jw-start="1977" data-jw-end="1977"
                data-hist-start="1977" data-hist-end="1977">
         <summary>
           <span class="tl-event-date">1977</span>
           <span class="tl-event-title">Knorr&#x27;s death and the Franz-era Governing Body</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -492,17 +475,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1980-1981-raymond-franz-crisis"
+      <details class="tl-event" id="tl-ev-1980-1981-raymond-franz-crisis"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1980" data-end="1981"
                data-jw-start="1980" data-jw-end="1981"
                data-hist-start="1980" data-hist-end="1981">
         <summary>
           <span class="tl-event-date">1980–1981</span>
           <span class="tl-event-title">Raymond Franz and the 1980 Governing Body doctrinal crisis</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -519,17 +501,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1992-2001-un-ngo-affiliation"
+      <details class="tl-event" id="tl-ev-1992-2001-un-ngo-affiliation"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="1992" data-end="2001"
                data-jw-start="1992" data-jw-end="2001"
                data-hist-start="1992" data-hist-end="2001">
         <summary>
           <span class="tl-event-date">1992–2001</span>
           <span class="tl-event-title">UN NGO affiliation and its exposure</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -546,17 +527,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="1995-generation-teaching-change"
+      <details class="tl-event" id="tl-ev-1995-generation-teaching-change"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="1995" data-end="1995"
                data-jw-start="1995" data-jw-end="1995"
                data-hist-start="1995" data-hist-end="1995">
         <summary>
           <span class="tl-event-date">1995</span>
           <span class="tl-event-title">The “generation” teaching change of 1995</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -573,17 +553,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="2000-2001-corporate-restructuring"
+      <details class="tl-event" id="tl-ev-2000-2001-corporate-restructuring"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="2000" data-end="2001"
                data-jw-start="2000" data-jw-end="2001"
                data-hist-start="2000" data-hist-end="2001">
         <summary>
           <span class="tl-event-date">2000–2001</span>
           <span class="tl-event-title">Corporate restructuring: Christian Congregation of Jehovah&#x27;s Witnesses</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -600,17 +579,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="2002-two-witness-rule-abuse-reporting"
+      <details class="tl-event" id="tl-ev-2002-two-witness-rule-abuse-reporting"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="2002" data-end="2002"
                data-jw-start="2002" data-jw-end="2002"
                data-hist-start="2002" data-hist-end="2002">
         <summary>
           <span class="tl-event-date">2002</span>
           <span class="tl-event-title">The two-witness rule and child sexual abuse policy</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -627,17 +605,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="2010-overlapping-generations"
+      <details class="tl-event" id="tl-ev-2010-overlapping-generations"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="4"
                data-start="2010" data-end="2010"
                data-jw-start="2010" data-jw-end="2010"
                data-hist-start="2010" data-hist-end="2010">
         <summary>
           <span class="tl-event-date">2010</span>
           <span class="tl-event-title">The “overlapping generations” teaching of 2010</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -654,17 +631,16 @@
       </details>
     </li>
     <li>
-      <details class="tl-event" id="2015-2017-australian-royal-commission"
+      <details class="tl-event" id="tl-ev-2015-2017-australian-royal-commission"
                data-tags="watchtower-history"
                data-circa="0"
-               data-importance="5"
                data-start="2015" data-end="2017"
                data-jw-start="2015" data-jw-end="2017"
                data-hist-start="2015" data-hist-end="2017">
         <summary>
           <span class="tl-event-date">2015–2017</span>
           <span class="tl-event-title">Australian Royal Commission findings</span>
-          <span class="tl-event-tags"><span class="tl-event-tag">Watchtower history</span></span>
+          <span class="tl-event-tags"><span class="tl-tag-badge" style="--tag-color:hsl(214, 55%, 45%)">Watchtower history</span></span>
         </summary>
         <div class="tl-event-body">
           <div class="tl-col tl-col-jw">
@@ -681,10 +657,6 @@
       </details>
     </li>
     </ol>
-    <div class="empty no-match" id="tl-no-match">
-      <div class="big">Nothing matches these filters</div>
-      <p>Re-enable a package above to see events again.</p>
-    </div>
 
   </div>
 </main>
@@ -697,67 +669,59 @@
        reproduced here only to the extent needed to document the specific
        alteration under discussion. Each entry links to the current official
        text.</p>
-    <p>Generated 27 July 2026, 08:28 UTC.</p>
+    <p>Generated 27 July 2026, 10:46 UTC.</p>
   </div>
 </footer>
 <script>
 (function () {
-  var listRoot = document.getElementById('tl-list');
+  var dataEl = document.getElementById('tl-events-data');
   var wrap = document.getElementById('tl-canvas-wrap');
-  var svg = document.getElementById('tl-svg');
-  var tooltip = document.getElementById('tl-tooltip');
-  var noMatch = document.getElementById('tl-no-match');
-  if (!listRoot || !wrap || !svg) return;
+  var track = document.getElementById('tl-track');
+  var panel = document.getElementById('tl-detail-panel');
+  var pillsRoot = document.getElementById('tl-tag-pills');
+  if (!dataEl || !wrap || !track) return;
 
-  var VBOX_W = 1000;
-  var MARGIN_L = 14, MARGIN_R = 14;
-  var LANE_H = 26;
-  var AXIS_H = 30;
-  var TOP_PAD = 16;
-  var MIN_SPAN = 3;
+  var DATA = JSON.parse(dataEl.textContent);
+  var TAGS = DATA.tags;
+  var TAGS_BY_KEY = {};
+  TAGS.forEach(function (t) { TAGS_BY_KEY[t.key] = t; });
+  var EVENTS = DATA.events;
+  if (!EVENTS.length) return;
+
+  var CARD_H = 32, LANE_GAP = 6, CARD_GAP_PX = 10;
+  var POINT_CARD_PX = 168, MIN_CARD_PX = 90;
+  var AXIS_H = 32, MIN_SPAN = 3;
 
   function yearLabel(y) {
     y = Math.round(y);
     return y < 0 ? (Math.abs(y) + ' BCE') : String(y);
   }
-  function formatDateLabel(d, circa) {
-    var label = d.start === d.end
-      ? yearLabel(d.start)
-      : (yearLabel(d.start) + '\u2013' + yearLabel(d.end));
-    return circa ? ('c. ' + label) : label;
+  function dateLabel(d, circa) {
+    var s = d.start === d.end ? yearLabel(d.start) : (yearLabel(d.start) + '\u2013' + yearLabel(d.end));
+    return circa ? ('c. ' + s) : s;
   }
-  function escapeText(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
-
-  var events = Array.prototype.slice.call(listRoot.querySelectorAll('.tl-event')).map(function (el) {
-    return {
-      el: el,
-      li: el.parentElement,
-      title: el.querySelector('.tl-event-title').textContent,
-      dateLabelEl: el.querySelector('.tl-event-date'),
-      tags: (el.dataset.tags || '').split(',').filter(Boolean),
-      circa: el.dataset.circa === '1',
-      importance: parseInt(el.dataset.importance, 10) || 3,
-      jw: { start: parseFloat(el.dataset.jwStart), end: parseFloat(el.dataset.jwEnd) },
-      historical: { start: parseFloat(el.dataset.histStart), end: parseFloat(el.dataset.histEnd) },
-    };
-  });
-  if (!events.length) return;
 
   var basis = 'jw';
   var activeTags = {};
-  var pillButtons = Array.prototype.slice.call(document.querySelectorAll('#tl-package-pills .pill'));
-  pillButtons.forEach(function (p) {
-    if (!p.disabled && p.getAttribute('aria-pressed') === 'true') activeTags[p.dataset.tag] = true;
-  });
+  TAGS.forEach(function (t) { if (t.hasEvents) activeTags[t.key] = true; });
 
-  function effective(ev) { return ev[basis]; }
+  function effectiveDate(ev) {
+    return (basis === 'jw' ? ev.dateJw : ev.dateHistorical) || ev.date;
+  }
+  function visibleEvents() {
+    return EVENTS.filter(function (ev) {
+      return ev.tags.some(function (t) { return activeTags[t]; });
+    });
+  }
 
   function absoluteExtent() {
     var min = Infinity, max = -Infinity;
-    events.forEach(function (ev) {
-      [ev.jw, ev.historical].forEach(function (d) {
+    EVENTS.forEach(function (ev) {
+      [ev.date, ev.dateJw, ev.dateHistorical].forEach(function (d) {
+        if (!d) return;
         min = Math.min(min, d.start);
         max = Math.max(max, d.end);
       });
@@ -767,123 +731,165 @@
   var ABS_EXTENT = absoluteExtent();
   var ABS_SPAN = Math.max(ABS_EXTENT[1] - ABS_EXTENT[0], MIN_SPAN);
 
-  function visibleEvents() {
-    return events.filter(function (ev) {
-      return ev.tags.some(function (t) { return activeTags[t]; });
-    });
-  }
-
   function extentOf(list) {
     if (!list.length) return ABS_EXTENT.slice();
     var min = Infinity, max = -Infinity;
     list.forEach(function (ev) {
-      var d = effective(ev);
+      var d = effectiveDate(ev);
       min = Math.min(min, d.start);
       max = Math.max(max, d.end);
     });
     if (min === max) { min -= 5; max += 5; }
-    var pad = (max - min) * 0.08;
+    var pad = (max - min) * 0.1;
     return [min - pad, max + pad];
   }
-
   function clampView(v) {
-    var span = Math.max(MIN_SPAN, Math.min(v[1] - v[0], ABS_SPAN * 1.1));
+    var span = Math.max(MIN_SPAN, Math.min(v[1] - v[0], ABS_SPAN * 1.15));
     var mid = (v[0] + v[1]) / 2;
     return [mid - span / 2, mid + span / 2];
   }
 
   var view = clampView(extentOf(visibleEvents()));
 
-  function x(year) {
+  function xPix(year) {
     var span = view[1] - view[0];
-    return MARGIN_L + ((year - view[0]) / span) * (VBOX_W - MARGIN_L - MARGIN_R);
+    return ((year - view[0]) / span) * wrap.clientWidth;
+  }
+  function cardWidthPx(ev) {
+    var d = effectiveDate(ev);
+    if (d.end > d.start) return Math.max(xPix(d.end) - xPix(d.start), MIN_CARD_PX);
+    return POINT_CARD_PX;
   }
 
+  // Lanes are assigned in chronological (start-ascending) order, which is
+  // what makes the single "rightmost edge per lane" greedy check valid -
+  // assigning by importance instead would let an earlier, lower-priority
+  // card be wrongly judged as overlapping a later high-priority one that
+  // already claimed a lane. importance affects card styling only, not
+  // placement order.
   function assignLanes(list) {
-    var span = view[1] - view[0];
-    var gap = span * 0.015;
-    var laneEnds = [];
-    list.slice().sort(function (a, b) { return effective(a).start - effective(b).start; })
-      .forEach(function (ev) {
-        var d = effective(ev);
-        var lane = 0;
-        while (lane < laneEnds.length && laneEnds[lane] > d.start - gap) lane++;
-        ev._lane = lane;
-        laneEnds[lane] = Math.max(d.end, d.start);
-      });
-    return Math.max(laneEnds.length, 1);
+    var sorted = list.slice().sort(function (a, b) {
+      return effectiveDate(a).start - effectiveDate(b).start;
+    });
+    var laneRightEdge = [];
+    sorted.forEach(function (ev) {
+      var left = xPix(effectiveDate(ev).start);
+      var width = cardWidthPx(ev);
+      var lane = 0;
+      while (laneRightEdge[lane] !== undefined && laneRightEdge[lane] + CARD_GAP_PX > left) lane++;
+      laneRightEdge[lane] = left + width;
+      ev._left = left; ev._width = width; ev._lane = lane;
+    });
+    return Math.max(laneRightEdge.length, 1);
   }
 
-  var selectedId = null;
+  var selectedSlug = null;
 
   function render() {
     var list = visibleEvents();
-    var laneCount = assignLanes(list);
-    var height = TOP_PAD + laneCount * LANE_H + AXIS_H;
-    svg.setAttribute('viewBox', '0 0 ' + VBOX_W + ' ' + height);
 
-    var parts = [];
-    var today = new Date().getUTCFullYear();
-    if (today > view[0] && today < view[1]) {
-      parts.push('<line class="tl-today-line" x1="' + x(today) + '" x2="' + x(today) +
-        '" y1="0" y2="' + (height - AXIS_H) + '"></line>');
+    if (!list.length) {
+      track.style.height = '140px';
+      track.innerHTML = '<div class="tl-empty-msg">Nothing matches these filters.<br>Re-enable a tag above.</div>';
+      return;
     }
 
-    var axisY = height - AXIS_H;
-    parts.push('<line class="tl-axis-line" x1="' + MARGIN_L + '" x2="' + (VBOX_W - MARGIN_R) +
-      '" y1="' + axisY + '" y2="' + axisY + '"></line>');
+    var laneCount = assignLanes(list);
+    var height = laneCount * (CARD_H + LANE_GAP) + AXIS_H + 10;
+    track.style.height = height + 'px';
+    var axisTop = height - AXIS_H;
+
+    var html = [];
+    var today = new Date().getUTCFullYear();
+    if (today > view[0] && today < view[1]) {
+      html.push('<div class="tl-today-line" style="left:' + xPix(today) + 'px; height:' + axisTop + 'px"></div>');
+    }
+    html.push('<div class="tl-axis" style="top:' + axisTop + 'px"></div>');
 
     var span = view[1] - view[0];
     var steps = [2000, 1000, 500, 250, 100, 50, 25, 10, 5, 2, 1];
     var step = steps[steps.length - 1];
     for (var i = 0; i < steps.length; i++) {
-      if (span / steps[i] >= 4) { step = steps[i]; break; }
+      if (span / steps[i] >= 5) { step = steps[i]; break; }
     }
     var first = Math.ceil(view[0] / step) * step;
     for (var yr = first; yr <= view[1]; yr += step) {
-      var tx = x(yr);
-      parts.push('<g class="tl-tick"><line x1="' + tx + '" x2="' + tx + '" y1="' + axisY +
-        '" y2="' + (axisY + 5) + '"></line><text x="' + tx + '" y="' + (axisY + 18) +
-        '" text-anchor="middle">' + yearLabel(yr) + '</text></g>');
+      var tx = xPix(yr);
+      html.push('<div class="tl-tick" style="left:' + tx + 'px; top:' + axisTop + 'px; height:' + AXIS_H + 'px"></div>');
+      html.push('<div class="tl-tick-label" style="left:' + tx + 'px; top:' + (axisTop + 6) + 'px">' + yearLabel(yr) + '</div>');
     }
 
     list.forEach(function (ev) {
-      var d = effective(ev);
-      var laneY = TOP_PAD + ev._lane * LANE_H + LANE_H / 2;
-      var r = 3 + ev.importance * 0.9;
-      var cls = 'tl-marker' + (ev.circa ? ' circa' : '') + (ev.el.id === selectedId ? ' selected' : '');
-      var titleSafe = escapeText(ev.title);
-      if (d.end > d.start) {
-        var x1 = x(d.start), x2 = x(d.end);
-        parts.push('<g class="' + cls + '" data-id="' + ev.el.id + '">' +
-          '<rect x="' + x1 + '" y="' + (laneY - 4) + '" width="' + Math.max(2, x2 - x1) +
-          '" height="8" rx="3"></rect>' +
-          '<text x="' + (x1 + 4) + '" y="' + (laneY - 8) + '">' + titleSafe + '</text></g>');
-      } else {
-        var cx = x(d.start);
-        parts.push('<g class="' + cls + '" data-id="' + ev.el.id + '">' +
-          '<circle cx="' + cx + '" cy="' + laneY + '" r="' + r + '"></circle>' +
-          '<text x="' + (cx + r + 4) + '" y="' + (laneY + 4) + '">' + titleSafe + '</text></g>');
-      }
+      var tag = TAGS_BY_KEY[ev.tags[0]];
+      var color = tag ? tag.color : 'var(--accent)';
+      var top = ev._lane * (CARD_H + LANE_GAP);
+      var cls = 'tl-card' + (ev.date.circa ? ' circa' : '') + (ev.slug === selectedSlug ? ' selected' : '');
+      html.push(
+        '<div class="' + cls + '" data-slug="' + ev.slug + '" tabindex="0" role="button" ' +
+        'style="left:' + ev._left + 'px; width:' + ev._width + 'px; top:' + top + 'px; --tag-color:' + color + '">' +
+        '<span class="tl-card-title">' + escapeHtml(ev.title) + '</span>' +
+        '<span class="tl-card-year">' + escapeHtml(dateLabel(effectiveDate(ev), ev.date.circa)) + '</span>' +
+        '</div>'
+      );
     });
 
-    svg.innerHTML = parts.join('');
-
-    var listIds = {};
-    list.forEach(function (ev) { listIds[ev.el.id] = true; });
-    events.forEach(function (ev) { ev.li.hidden = !listIds[ev.el.id]; });
-    if (noMatch) noMatch.classList.toggle('show', list.length === 0);
+    track.innerHTML = html.join('');
   }
 
-  function reorderList() {
-    var items = Array.prototype.slice.call(listRoot.children);
-    items.sort(function (liA, liB) {
-      var evA = events.filter(function (e) { return e.li === liA; })[0];
-      var evB = events.filter(function (e) { return e.li === liB; })[0];
-      return effective(evA).start - effective(evB).start;
-    });
-    items.forEach(function (li) { listRoot.appendChild(li); });
+  function tagBadgesHtml(tags) {
+    return tags.map(function (key) {
+      var t = TAGS_BY_KEY[key];
+      if (!t) return '';
+      return '<span class="tl-tag-badge" style="--tag-color:' + t.color + '">' + escapeHtml(t.label) + '</span>';
+    }).join('');
   }
+  function linksHtml(links) {
+    if (!links.length) return '<p class="tl-no-source">No verified source link yet.</p>';
+    return links.map(function (l) {
+      return '<p class="tl-links"><a href="' + encodeURI(l.url) + '" target="_blank" rel="noopener nofollow">' +
+        escapeHtml(l.label) + ' \u2192</a></p>';
+    }).join('');
+  }
+
+  function showDetail(ev) {
+    selectedSlug = ev.slug;
+    var d = effectiveDate(ev);
+    panel.innerHTML =
+      '<div class="tl-detail-head">' +
+        '<div class="tl-detail-title">' + escapeHtml(ev.title) + '</div>' +
+        '<div class="tl-detail-date">' + escapeHtml(dateLabel(d, ev.date.circa)) + '</div>' +
+        '<div class="tl-detail-tags">' + tagBadgesHtml(ev.tags) + '</div>' +
+      '</div>' +
+      '<div class="tl-detail-body">' +
+        '<div class="tl-col tl-col-jw"><div class="tl-col-label">Watchtower&rsquo;s account</div>' +
+          '<p>' + escapeHtml(ev.jw.summary) + '</p>' + linksHtml(ev.jw.links) + '</div>' +
+        '<div class="tl-col tl-col-historical"><div class="tl-col-label">Historical assessment</div>' +
+          '<p>' + escapeHtml(ev.historical.summary) + '</p>' + linksHtml(ev.historical.links) + '</div>' +
+      '</div>';
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    render();
+  }
+
+  function eventBySlug(slug) {
+    for (var i = 0; i < EVENTS.length; i++) if (EVENTS[i].slug === slug) return EVENTS[i];
+    return null;
+  }
+
+  track.addEventListener('click', function (e) {
+    var card = e.target.closest ? e.target.closest('.tl-card') : null;
+    if (!card) return;
+    var ev = eventBySlug(card.getAttribute('data-slug'));
+    if (ev) showDetail(ev);
+  });
+  track.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var card = e.target.closest ? e.target.closest('.tl-card') : null;
+    if (!card) return;
+    e.preventDefault();
+    var ev = eventBySlug(card.getAttribute('data-slug'));
+    if (ev) showDetail(ev);
+  });
 
   function zoomBy(factor) {
     var span = view[1] - view[0];
@@ -891,7 +897,6 @@
     view = clampView([mid - (span * factor) / 2, mid + (span * factor) / 2]);
     render();
   }
-
   var zoomInBtn = document.getElementById('tl-zoom-in');
   var zoomOutBtn = document.getElementById('tl-zoom-out');
   var zoomFitBtn = document.getElementById('tl-zoom-fit');
@@ -904,7 +909,7 @@
 
   wrap.addEventListener('wheel', function (e) {
     e.preventDefault();
-    var rect = svg.getBoundingClientRect();
+    var rect = wrap.getBoundingClientRect();
     var mx = e.clientX - rect.left;
     var span = view[1] - view[0];
     var mouseYear = view[0] + (mx / rect.width) * span;
@@ -918,41 +923,26 @@
   var pointers = {};
   var dragLast = null;
 
-  svg.addEventListener('pointerdown', function (e) {
-    svg.setPointerCapture(e.pointerId);
+  wrap.addEventListener('pointerdown', function (e) {
+    if (e.target.closest && e.target.closest('.tl-card')) return;
+    wrap.setPointerCapture(e.pointerId);
     pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
     if (Object.keys(pointers).length === 1) {
       dragLast = e.clientX;
-      svg.classList.add('dragging');
+      wrap.classList.add('dragging');
     }
   });
 
-  svg.addEventListener('pointermove', function (e) {
-    var g = e.target.closest ? e.target.closest('[data-id]') : null;
-    if (g && Object.keys(pointers).length === 0) {
-      var ev = events.filter(function (ev) { return ev.el.id === g.getAttribute('data-id'); })[0];
-      if (ev) {
-        var d = effective(ev);
-        tooltip.textContent = ev.title + ' \u2014 ' + formatDateLabel(d, ev.circa);
-        var wrapRect = wrap.getBoundingClientRect();
-        tooltip.style.left = (e.clientX - wrapRect.left) + 'px';
-        tooltip.style.top = (e.clientY - wrapRect.top) + 'px';
-        tooltip.hidden = false;
-      }
-    } else if (!g) {
-      tooltip.hidden = true;
-    }
-
+  wrap.addEventListener('pointermove', function (e) {
     if (!(e.pointerId in pointers)) return;
     var ids = Object.keys(pointers);
     if (ids.length === 1 && dragLast !== null) {
-      var rect = svg.getBoundingClientRect();
+      var rect = wrap.getBoundingClientRect();
       var deltaPx = e.clientX - dragLast;
-      var span2 = view[1] - view[0];
-      var deltaYears = (deltaPx / rect.width) * span2 * (VBOX_W / (VBOX_W - MARGIN_L - MARGIN_R));
+      var span = view[1] - view[0];
+      var deltaYears = (deltaPx / rect.width) * span;
       view = clampView([view[0] - deltaYears, view[1] - deltaYears]);
       dragLast = e.clientX;
-      tooltip.hidden = true;
       render();
     } else if (ids.length === 2) {
       var p0 = pointers[ids[0]], p1 = pointers[ids[1]];
@@ -961,13 +951,13 @@
       var np0 = pointers[ids[0]], np1 = pointers[ids[1]];
       var newDist = Math.hypot(np1.x - np0.x, np1.y - np0.y);
       if (prevDist > 5 && newDist > 5) {
-        var rect2 = svg.getBoundingClientRect();
+        var rect2 = wrap.getBoundingClientRect();
         var midX = (np0.x + np1.x) / 2 - rect2.left;
         var midYear = view[0] + (midX / rect2.width) * (view[1] - view[0]);
         var scale = prevDist / newDist;
-        var span3 = (view[1] - view[0]) * scale;
-        var start2 = midYear - (midX / rect2.width) * span3;
-        view = clampView([start2, start2 + span3]);
+        var newSpan2 = (view[1] - view[0]) * scale;
+        var start2 = midYear - (midX / rect2.width) * newSpan2;
+        view = clampView([start2, start2 + newSpan2]);
         render();
       }
       return;
@@ -979,25 +969,11 @@
     delete pointers[e.pointerId];
     if (Object.keys(pointers).length === 0) {
       dragLast = null;
-      svg.classList.remove('dragging');
+      wrap.classList.remove('dragging');
     }
   }
-  svg.addEventListener('pointerup', endPointer);
-  svg.addEventListener('pointercancel', endPointer);
-  svg.addEventListener('mouseleave', function () { tooltip.hidden = true; });
-
-  svg.addEventListener('click', function (e) {
-    var g = e.target.closest ? e.target.closest('[data-id]') : null;
-    if (!g) return;
-    var id = g.getAttribute('data-id');
-    selectedId = id;
-    var ev = events.filter(function (ev) { return ev.el.id === id; })[0];
-    if (ev) {
-      ev.el.open = true;
-      ev.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    render();
-  });
+  wrap.addEventListener('pointerup', endPointer);
+  wrap.addEventListener('pointercancel', endPointer);
 
   var basisButtons = Array.prototype.slice.call(document.querySelectorAll('.tl-basis-btn'));
   basisButtons.forEach(function (btn) {
@@ -1005,15 +981,16 @@
       if (btn.getAttribute('aria-pressed') === 'true') return;
       basisButtons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
       basis = btn.dataset.basis;
-      events.forEach(function (ev) {
-        ev.dateLabelEl.textContent = formatDateLabel(effective(ev), ev.circa);
-      });
-      reorderList();
       view = clampView(extentOf(visibleEvents()));
       render();
+      if (selectedSlug) {
+        var ev = eventBySlug(selectedSlug);
+        if (ev) showDetail(ev);
+      }
     });
   });
 
+  var pillButtons = pillsRoot ? Array.prototype.slice.call(pillsRoot.querySelectorAll('.tl-tag-pill')) : [];
   pillButtons.forEach(function (p) {
     if (p.disabled) return;
     p.addEventListener('click', function () {
@@ -1025,7 +1002,8 @@
     });
   });
 
-  reorderList();
+  window.addEventListener('resize', render);
+
   render();
 })();
 </script>

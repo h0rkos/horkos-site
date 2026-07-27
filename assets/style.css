@@ -312,14 +312,27 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     .stats { gap: 24px; }
 }
 
-/* --- timeline --- */
+/* --- timeline ---
+   Card-based, not dot-plus-floating-label: every event renders as a
+   bounded box with its own clipped (ellipsis) text, so nothing can ever
+   visually overlap regardless of zoom level - the box's width IS the
+   overlap-avoidance unit, unlike free-floating SVG text next to a point
+   marker. Lanes stack cards that would otherwise collide (see
+   TIMELINE_SCRIPT's assignLanes()). Inspired by historicaltimeline.online's
+   approach of rendering real info cards on the timeline itself rather than
+   tiny markers. */
 .tl-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 0 16px;
+}
+.tl-toolbar-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-    margin: 0 0 16px;
 }
 .tl-basis-toggle {
     display: inline-flex;
@@ -354,58 +367,167 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 }
 .tl-zoom-controls button:hover { border-color: var(--accent); color: var(--text); }
 
-.pill:disabled { opacity: 0.4; cursor: not-allowed; }
-.pill:disabled:hover { border-color: var(--border-strong); color: var(--text-muted); }
+/* --- tags (colour-coded; a sub-tag's --tag-color is a lighter shade of
+   the same hue as its parent, computed server-side by timeline_db.tag_color()
+   so the "family resemblance" holds without any manual colour picking) --- */
+.tl-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tl-tag-pill {
+    --tag-color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 13px 5px 10px;
+    border-radius: 14px;
+    border: 1px solid var(--tag-color);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: background 0.12s, color 0.12s;
+}
+.tl-tag-pill::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tag-color);
+    flex-shrink: 0;
+}
+.tl-tag-pill:hover:not(:disabled) { color: var(--text); }
+.tl-tag-pill[aria-pressed="true"] { background: var(--tag-color); color: #fff; }
+.tl-tag-pill:disabled { opacity: 0.4; cursor: not-allowed; }
 
+.tl-tag-badge {
+    --tag-color: var(--accent);
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--tag-color);
+    color: var(--tag-color);
+    white-space: nowrap;
+}
+
+/* --- canvas: the hero element on the page --- */
 .tl-canvas-wrap {
     position: relative;
     background: var(--bg-raised);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     margin: 0 0 24px;
-    overflow: hidden;
+    height: 560px;
+    overflow-x: hidden;
+    overflow-y: auto;
     touch-action: none;
     user-select: none;
+    cursor: grab;
 }
-.tl-canvas-wrap svg { display: block; width: 100%; height: auto; cursor: grab; }
-.tl-canvas-wrap svg.dragging { cursor: grabbing; }
+.tl-canvas-wrap.dragging { cursor: grabbing; }
+.tl-track { position: relative; width: 100%; }
 
-.tl-axis-line { stroke: var(--border-strong); stroke-width: 1; }
-.tl-tick line { stroke: var(--border); stroke-width: 1; }
-.tl-tick text { fill: var(--text-faint); font-size: 11px; }
-.tl-today-line { stroke: var(--accent-dim); stroke-width: 1; stroke-dasharray: 3 3; }
-
-.tl-marker circle, .tl-marker rect {
-    fill: var(--accent);
-    stroke: var(--bg-raised);
-    stroke-width: 1.5;
-    cursor: pointer;
-}
-.tl-marker.circa circle, .tl-marker.circa rect { fill: var(--accent-dim); stroke-dasharray: 2 2; }
-.tl-marker:hover circle, .tl-marker:hover rect { fill: var(--flag); }
-.tl-marker.selected circle, .tl-marker.selected rect { fill: var(--flag); stroke: var(--text); }
-.tl-marker text {
-    fill: var(--text-muted);
-    font-size: 11px;
-    pointer-events: none;
-}
-
-.tl-tooltip {
+.tl-axis { position: absolute; left: 0; right: 0; border-top: 1px solid var(--border-strong); }
+.tl-tick { position: absolute; width: 1px; background: var(--border); }
+.tl-tick-label {
     position: absolute;
-    pointer-events: none;
-    background: var(--bg-inset);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 0.82rem;
-    color: var(--text);
-    max-width: 240px;
-    z-index: 5;
-    transform: translate(-50%, -100%);
-    margin-top: -10px;
+    font-size: 11px;
+    color: var(--text-faint);
+    transform: translateX(-50%);
     white-space: nowrap;
 }
+.tl-today-line { position: absolute; top: 0; border-left: 1px dashed var(--accent-dim); }
+.tl-empty-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-align: center;
+}
 
+.tl-card {
+    --tag-color: var(--accent);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 12px 0 9px;
+    border-radius: 5px;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-strong);
+    border-left: 4px solid var(--tag-color);
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.tl-card:hover { border-color: var(--tag-color); background: var(--bg-raised); }
+.tl-card:focus-visible { outline: 2px solid var(--tag-color); outline-offset: 1px; }
+.tl-card.selected { background: var(--bg-raised); outline: 2px solid var(--tag-color); }
+.tl-card.circa { border-left-style: dashed; }
+.tl-card-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+.tl-card-year {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- detail panel: appears only once an event card is clicked. This IS
+   the primary way to read an event's side-by-side comparison when JS is
+   active - there is no permanently-visible list competing with the
+   timeline for attention (see .tl-list below). --- */
+.tl-detail-panel {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 0 0 24px;
+    overflow: hidden;
+}
+.tl-detail-head {
+    padding: 16px 22px;
+    background: var(--bg-inset);
+    border-bottom: 1px solid var(--border);
+}
+.tl-detail-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 4px; }
+.tl-detail-date {
+    color: var(--text-faint);
+    font-size: 0.86rem;
+    font-variant-numeric: tabular-nums;
+}
+.tl-detail-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.tl-detail-body { display: grid; grid-template-columns: 1fr 1fr; }
+.tl-col { padding: 16px 20px; }
+.tl-col-jw { border-right: 1px solid var(--border); }
+.tl-col-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+}
+.tl-col p { margin: 0 0 10px; color: var(--text-muted); }
+.tl-col .tl-links { margin: 0 0 4px; }
+.tl-col .tl-links a { font-size: 0.86rem; }
+.tl-col .tl-no-source { font-size: 0.86rem; font-style: italic; color: var(--text-faint); }
+
+/* --- no-JS fallback: a plain accessible list, native <details>/<summary>
+   click-to-expand, zero JavaScript required. This is what a no-JS visitor
+   sees INSTEAD of the canvas+panel above, not alongside it. --- */
 .tl-list { list-style: none; margin: 0; padding: 0; }
 .tl-event {
     background: var(--bg-raised);
@@ -414,7 +536,6 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     margin: 0 0 10px;
     overflow: hidden;
 }
-.tl-event[hidden] { display: none; }
 .tl-event[open] { border-color: var(--border-strong); }
 .tl-event summary {
     cursor: pointer;
@@ -436,47 +557,27 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 }
 .tl-event-title { font-weight: 600; flex: 1 1 auto; }
 .tl-event-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tl-event-tag {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-faint);
-    border: 1px solid var(--border-strong);
-    border-radius: 3px;
-    padding: 1px 7px;
-    white-space: nowrap;
-}
 .tl-event-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
     border-top: 1px solid var(--border);
 }
-.tl-col { padding: 16px 20px; }
-.tl-col-jw { border-right: 1px solid var(--border); }
-.tl-col-label {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-faint);
-    margin-bottom: 8px;
-}
-.tl-col p { margin: 0 0 10px; color: var(--text-muted); }
-.tl-col .tl-links { margin: 0 0 4px; }
-.tl-col .tl-links a { font-size: 0.86rem; }
-.tl-col .tl-no-source { font-size: 0.86rem; font-style: italic; color: var(--text-faint); }
 
 @media (max-width: 700px) {
-    .tl-event-body { grid-template-columns: 1fr; }
+    .tl-detail-body, .tl-event-body { grid-template-columns: 1fr; }
     .tl-col-jw { border-right: none; border-bottom: 1px solid var(--border); }
-    .tl-toolbar { flex-direction: column; align-items: stretch; }
+    .tl-canvas-wrap { height: 460px; }
 }
 
-/* Without JS the canvas is unusable (no zoom/pan controls work), so hide it
-   and the toolbar and show only the accessible chronological list below -
-   same degrade-gracefully pattern as .filters in the Change Monitor. Native
-   <details>/<summary> in .tl-list already gives click-to-expand side-by-side
-   comparison with zero JavaScript required. */
+/* Without JS the canvas/toolbar/detail-panel are unusable (no zoom/pan,
+   nothing to click into), so hide them and show only the accessible
+   chronological list - same degrade-gracefully pattern as .filters in the
+   Change Monitor. With JS active it's the reverse: the list is hidden
+   entirely and the canvas becomes the salient feature on the page, with
+   the detail panel appearing only once a card is clicked (it also starts
+   `hidden` via its HTML attribute, independent of this JS toggle). */
 .tl-toolbar, .tl-canvas-wrap { display: none; }
 .js .tl-toolbar { display: flex; }
 .js .tl-canvas-wrap { display: block; }
+.js .tl-list { display: none; }
