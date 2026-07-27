@@ -370,7 +370,26 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 /* --- tags (colour-coded; a sub-tag's --tag-color is a lighter shade of
    the same hue as its parent, computed server-side by timeline_db.tag_color()
    so the "family resemblance" holds without any manual colour picking) --- */
-.tl-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Two independent filter axes: WHEN (hierarchical time periods) and WHAT
+   (flat cross-cutting topics). Same mechanic, separately labelled so it's
+   obvious they compose rather than compete. */
+.tl-tag-groups { display: flex; flex-direction: column; gap: 10px; }
+.tl-tag-group { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tl-tag-group-label {
+    flex: 0 0 84px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+.tl-tags { display: flex; gap: 8px; flex-wrap: wrap; flex: 1 1 0; }
+/* Depth indent makes the time hierarchy legible without a tree widget. */
+.tl-tag-depth-1 { margin-left: 10px; font-size: 0.78rem; }
+.tl-tag-depth-2 { margin-left: 20px; font-size: 0.74rem; }
+/* Topic pills are squared off so they never read as part of the time tree,
+   even where a hue lands close to one of the era colours. */
+.tl-tag-topic { border-radius: 4px; }
+.tl-tag-topic::before { border-radius: 2px; }
 .tl-tag-pill {
     --tag-color: var(--accent);
     cursor: pointer;
@@ -413,34 +432,23 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     white-space: nowrap;
 }
 
-/* --- dock: the timeline is pinned to the bottom of the viewport with a
-   fixed height so it never moves as the rest of the page (toolbar, detail
-   panel) changes size above it - "locked to the bottom of the window" per
-   feedback on the first version, where the canvas sat in normal document
-   flow and visibly jumped around. Full-bleed background bar (same pattern
-   as .masthead) with a max-width-constrained .tl-canvas-wrap inside it for
-   the actual content, so the timeline reads as part of the page rather
-   than a full-width strip. A .tl-dock-spacer at the end of the page body
-   reserves equivalent space so the fixed dock never covers the footer -
-   its height must be kept in sync with .tl-dock's here. */
-.tl-dock {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 20;
-    height: 400px;
-    background: var(--bg-raised);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.35);
-}
-.tl-dock-spacer { height: 400px; }
-
+/* --- frame: sits in normal document flow directly below the toolbar (per
+   feedback - an earlier version pinned the whole thing to the bottom of
+   the *viewport*, which wasn't what was wanted). The axis line ITSELF is
+   what's pinned to the bottom, but only within this frame's own fixed
+   height - cards stack in lanes growing upward from it. Because the frame
+   has a fixed height, only so many lanes fit; see fittingEvents(). */
 .tl-canvas-wrap {
-    height: 100%;
     position: relative;
+    height: 560px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 0 0 24px;
+    overflow: hidden;
     touch-action: none;
     user-select: none;
     cursor: grab;
-    overflow: hidden;
 }
 .tl-canvas-wrap.dragging { cursor: grabbing; }
 .tl-track { position: relative; width: 100%; height: 100%; }
@@ -483,6 +491,7 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
    HERE", even though the card itself floats well above the axis line. */
 .tl-connector {
     position: absolute;
+    z-index: 1;
     width: 1px;
     background: var(--border-strong);
     opacity: 0.35;
@@ -514,6 +523,7 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 .tl-card {
     --tag-color: var(--accent);
     position: absolute;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -625,17 +635,17 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 @media (max-width: 700px) {
     .tl-detail-body, .tl-event-body { grid-template-columns: 1fr; }
     .tl-col-jw { border-right: none; border-bottom: 1px solid var(--border); }
-    .tl-dock, .tl-dock-spacer { height: 300px; }
+    .tl-canvas-wrap { height: 420px; }
 }
 
-/* Without JS the dock/toolbar/detail-panel are unusable (no zoom/pan,
+/* Without JS the frame/toolbar/detail-panel are unusable (no zoom/pan,
    nothing to click into), so hide them and show only the accessible
    chronological list - same degrade-gracefully pattern as .filters in the
    Change Monitor. With JS active it's the reverse: the list is hidden
-   entirely and the dock becomes the salient feature on the page, with the
+   entirely and the frame becomes the salient feature on the page, with the
    detail panel appearing only once a card is clicked (it also starts
    `hidden` via its HTML attribute, independent of this JS toggle). */
-.tl-toolbar, .tl-dock, .tl-dock-spacer { display: none; }
+.tl-toolbar, .tl-canvas-wrap { display: none; }
 .js .tl-toolbar { display: flex; }
-.js .tl-dock, .js .tl-dock-spacer { display: block; }
+.js .tl-canvas-wrap { display: block; }
 .js .tl-list { display: none; }
