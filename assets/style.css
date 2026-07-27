@@ -311,3 +311,172 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     .change-meta { text-align: left; white-space: normal; }
     .stats { gap: 24px; }
 }
+
+/* --- timeline --- */
+.tl-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 0 0 16px;
+}
+.tl-basis-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.tl-basis-btn {
+    cursor: pointer;
+    padding: 7px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    font-family: inherit;
+}
+.tl-basis-btn + .tl-basis-btn { border-left: 1px solid var(--border-strong); }
+.tl-basis-btn[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }
+.tl-basis-btn:hover:not([aria-pressed="true"]) { background: var(--bg-inset); color: var(--text); }
+
+.tl-zoom-controls { display: flex; gap: 6px; align-items: center; }
+.tl-zoom-controls button {
+    cursor: pointer;
+    min-width: 34px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-inset);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+.tl-zoom-controls button:hover { border-color: var(--accent); color: var(--text); }
+
+.pill:disabled { opacity: 0.4; cursor: not-allowed; }
+.pill:disabled:hover { border-color: var(--border-strong); color: var(--text-muted); }
+
+.tl-canvas-wrap {
+    position: relative;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 0 0 24px;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+}
+.tl-canvas-wrap svg { display: block; width: 100%; height: auto; cursor: grab; }
+.tl-canvas-wrap svg.dragging { cursor: grabbing; }
+
+.tl-axis-line { stroke: var(--border-strong); stroke-width: 1; }
+.tl-tick line { stroke: var(--border); stroke-width: 1; }
+.tl-tick text { fill: var(--text-faint); font-size: 11px; }
+.tl-today-line { stroke: var(--accent-dim); stroke-width: 1; stroke-dasharray: 3 3; }
+
+.tl-marker circle, .tl-marker rect {
+    fill: var(--accent);
+    stroke: var(--bg-raised);
+    stroke-width: 1.5;
+    cursor: pointer;
+}
+.tl-marker.circa circle, .tl-marker.circa rect { fill: var(--accent-dim); stroke-dasharray: 2 2; }
+.tl-marker:hover circle, .tl-marker:hover rect { fill: var(--flag); }
+.tl-marker.selected circle, .tl-marker.selected rect { fill: var(--flag); stroke: var(--text); }
+.tl-marker text {
+    fill: var(--text-muted);
+    font-size: 11px;
+    pointer-events: none;
+}
+
+.tl-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--bg-inset);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    color: var(--text);
+    max-width: 240px;
+    z-index: 5;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    white-space: nowrap;
+}
+
+.tl-list { list-style: none; margin: 0; padding: 0; }
+.tl-event {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 0 0 10px;
+    overflow: hidden;
+}
+.tl-event[hidden] { display: none; }
+.tl-event[open] { border-color: var(--border-strong); }
+.tl-event summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 14px 20px;
+    background: var(--bg-inset);
+}
+.tl-event summary::-webkit-details-marker { display: none; }
+.tl-event summary::marker { content: ""; }
+.tl-event-date {
+    font-variant-numeric: tabular-nums;
+    color: var(--text-faint);
+    font-size: 0.86rem;
+    white-space: nowrap;
+    min-width: 7ch;
+}
+.tl-event-title { font-weight: 600; flex: 1 1 auto; }
+.tl-event-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tl-event-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-faint);
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    padding: 1px 7px;
+    white-space: nowrap;
+}
+.tl-event-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+}
+.tl-col { padding: 16px 20px; }
+.tl-col-jw { border-right: 1px solid var(--border); }
+.tl-col-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+}
+.tl-col p { margin: 0 0 10px; color: var(--text-muted); }
+.tl-col .tl-links { margin: 0 0 4px; }
+.tl-col .tl-links a { font-size: 0.86rem; }
+.tl-col .tl-no-source { font-size: 0.86rem; font-style: italic; color: var(--text-faint); }
+
+@media (max-width: 700px) {
+    .tl-event-body { grid-template-columns: 1fr; }
+    .tl-col-jw { border-right: none; border-bottom: 1px solid var(--border); }
+    .tl-toolbar { flex-direction: column; align-items: stretch; }
+}
+
+/* Without JS the canvas is unusable (no zoom/pan controls work), so hide it
+   and the toolbar and show only the accessible chronological list below -
+   same degrade-gracefully pattern as .filters in the Change Monitor. Native
+   <details>/<summary> in .tl-list already gives click-to-expand side-by-side
+   comparison with zero JavaScript required. */
+.tl-toolbar, .tl-canvas-wrap { display: none; }
+.js .tl-toolbar { display: flex; }
+.js .tl-canvas-wrap { display: block; }
