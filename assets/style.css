@@ -349,9 +349,21 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     font-size: 0.86rem;
     font-family: inherit;
 }
-.tl-basis-btn + .tl-basis-btn { border-left: 1px solid var(--border-strong); }
-.tl-basis-btn[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }
-.tl-basis-btn:hover:not([aria-pressed="true"]) { background: var(--bg-inset); color: var(--text); }
+.tl-mode-btn {
+    cursor: pointer;
+    padding: 7px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    font-family: inherit;
+}
+.tl-basis-btn + .tl-basis-btn,
+.tl-mode-btn + .tl-mode-btn { border-left: 1px solid var(--border-strong); }
+.tl-basis-btn[aria-pressed="true"],
+.tl-mode-btn[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }
+.tl-basis-btn:hover:not([aria-pressed="true"]),
+.tl-mode-btn:hover:not([aria-pressed="true"]) { background: var(--bg-inset); color: var(--text); }
 
 .tl-zoom-controls { display: flex; gap: 6px; align-items: center; }
 .tl-zoom-controls button {
@@ -370,11 +382,15 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 /* --- tags (colour-coded; a sub-tag's --tag-color is a lighter shade of
    the same hue as its parent, computed server-side by timeline_db.tag_color()
    so the "family resemblance" holds without any manual colour picking) --- */
-/* Two independent filter axes: WHEN (hierarchical time periods) and WHAT
-   (flat cross-cutting topics). Same mechanic, separately labelled so it's
-   obvious they compose rather than compete. */
+/* Two filter axes - WHEN (hierarchical time periods) and WHAT ABOUT (flat
+   cross-cutting topics) - but only ONE is active at a time. Combining them
+   was tried and rejected as confusing: with AND semantics an event lacking
+   any topic tag vanished the moment topic filtering was touched, and with
+   OR semantics the topic pills appeared to do nothing. A hard mode switch
+   makes each axis mean exactly one thing. See visibleEvents(). */
 .tl-tag-groups { display: flex; flex-direction: column; gap: 10px; }
 .tl-tag-group { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tl-tag-group[hidden] { display: none; }
 .tl-tag-group-label {
     flex: 0 0 84px;
     font-size: 0.72rem;
@@ -382,6 +398,18 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     letter-spacing: 0.08em;
     color: var(--text-faint);
 }
+.tl-bulk { display: flex; gap: 6px; margin-left: 4px; }
+.tl-bulk button {
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px dashed var(--border-strong);
+    background: transparent;
+    color: var(--text-faint);
+    font-size: 0.76rem;
+    font-family: inherit;
+}
+.tl-bulk button:hover { border-style: solid; border-color: var(--accent); color: var(--text); }
 .tl-tags { display: flex; gap: 8px; flex-wrap: wrap; flex: 1 1 0; }
 /* Depth indent makes the time hierarchy legible without a tree widget. */
 .tl-tag-depth-1 { margin-left: 10px; font-size: 0.78rem; }
@@ -418,6 +446,22 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 .tl-tag-pill:hover:not(:disabled) { color: var(--text); }
 .tl-tag-pill[aria-pressed="true"] { background: var(--tag-color); color: #fff; }
 .tl-tag-pill:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Scholarly-status badge. 'contested' is deliberately distinct from
+   'mythical': one means the field disagrees, the other means the field says
+   it didn't happen (and those events are simply absent from the
+   historical-critical view - see inBasis()). */
+.tl-hist-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+.tl-hist-contested { border: 1px dashed var(--flag); color: var(--flag); }
+.tl-hist-mythical { border: 1px dashed var(--removed); color: var(--removed); }
 
 .tl-tag-badge {
     --tag-color: var(--accent);
