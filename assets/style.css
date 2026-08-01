@@ -18,6 +18,24 @@
     --added:         #86bd94;
     --added-bg:      #1b2620;
     --flag:          #d4a45c;
+
+    /* Significance ramp: HOT for changes that alter what readers are taught,
+       COOL for changes that don't. The hue carries the ordering on its own,
+       so the scale reads at a glance without needing to consult the labels -
+       but the labels stay, because colour alone would exclude anyone who
+       can't distinguish these hues, and this scale is the whole point of the
+       page. Each level has a dim companion for the pressed/filled state. */
+    --sig-significant:      #e0614c;
+    --sig-significant-dim:  #3b201b;
+    --sig-notable:          #d4a45c;
+    --sig-notable-dim:      #35291a;
+    --sig-minor:            #5aa9a0;
+    --sig-minor-dim:        #1b302e;
+    --sig-none:             #5b83c4;
+    --sig-none-dim:         #1e2839;
+    --sig-unclassified:     #6e7681;
+    --sig-unclassified-dim: #262a30;
+
     --max-width:     1180px;
 }
 
@@ -134,6 +152,28 @@ h2 { font-size: 1.25rem; font-weight: 600; margin: 40px 0 12px; }
                white-space: nowrap; }
 .change-meta .date { color: var(--text-muted); display: block; }
 
+/* Both ends of the change are shown - the edition the wording dates from,
+   and the point by which it had been altered. Showing only the latter (as
+   this first did) left a reader unable to tell how long the original text
+   had stood, which is often the most telling part of a revision. */
+.change-meta .date-pair {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+    color: var(--text-muted);
+}
+.change-meta .date-item { white-space: nowrap; }
+.change-meta .date-label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+.change-meta .date-arrow { color: var(--text-faint); }
+
 .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 .badge {
     display: inline-block;
@@ -145,8 +185,18 @@ h2 { font-size: 1.25rem; font-weight: 600; margin: 40px 0 12px; }
     border: 1px solid var(--border-strong);
     color: var(--text-muted);
 }
-.badge.sig-significant { border-color: var(--flag); color: var(--flag); }
-.badge.sig-notable     { border-color: var(--accent); color: var(--accent); }
+.badge.sig-significant  { border-color: var(--sig-significant);  color: var(--sig-significant); }
+.badge.sig-notable      { border-color: var(--sig-notable);      color: var(--sig-notable); }
+.badge.sig-minor        { border-color: var(--sig-minor);        color: var(--sig-minor); }
+.badge.sig-none         { border-color: var(--sig-none);         color: var(--sig-none); }
+.badge.sig-unclassified { border-color: var(--sig-unclassified); color: var(--sig-unclassified); }
+/* Provenance reads as a quiet qualifier, never as a severity level - it must
+   not compete with the significance badge next to it. */
+.badge-source {
+    border-style: dashed;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
 
 .change-body { padding: 6px 24px 20px; }
 
@@ -261,6 +311,28 @@ h2 { font-size: 1.25rem; font-weight: 600; margin: 40px 0 12px; }
     border-color: var(--accent);
     color: #fff;
 }
+
+/* Significance pills carry their level's hue in BOTH states, so the ramp is
+   readable whether a level is currently included or excluded. Source pills
+   deliberately keep the neutral accent styling above - provenance is not a
+   severity, and colouring it on the same scale would imply it is. */
+.pill[data-sig="significant"]  { border-color: var(--sig-significant);  color: var(--sig-significant); }
+.pill[data-sig="notable"]      { border-color: var(--sig-notable);      color: var(--sig-notable); }
+.pill[data-sig="minor"]        { border-color: var(--sig-minor);        color: var(--sig-minor); }
+.pill[data-sig="none"]         { border-color: var(--sig-none);         color: var(--sig-none); }
+.pill[data-sig="unclassified"] { border-color: var(--sig-unclassified); color: var(--sig-unclassified); }
+
+.pill[data-sig]:hover { color: var(--text); }
+
+.pill[data-sig="significant"][aria-pressed="true"]  { background: var(--sig-significant-dim);  color: var(--sig-significant); }
+.pill[data-sig="notable"][aria-pressed="true"]      { background: var(--sig-notable-dim);      color: var(--sig-notable); }
+.pill[data-sig="minor"][aria-pressed="true"]        { background: var(--sig-minor-dim);        color: var(--sig-minor); }
+.pill[data-sig="none"][aria-pressed="true"]         { background: var(--sig-none-dim);         color: var(--sig-none); }
+.pill[data-sig="unclassified"][aria-pressed="true"] { background: var(--sig-unclassified-dim); color: var(--sig-unclassified); }
+
+/* An excluded level is dimmed rather than recoloured, so "off" never reads
+   as a different severity. */
+.pill[data-sig][aria-pressed="false"] { opacity: 0.45; }
 select.period {
     background: var(--bg-inset);
     color: var(--text);
@@ -309,6 +381,7 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
     .masthead .wrap { padding-top: 12px; padding-bottom: 12px; }
     .change-head { flex-direction: column; }
     .change-meta { text-align: left; white-space: normal; }
+    .change-meta .date-pair { justify-content: flex-start; }
     .stats { gap: 24px; }
 }
 
