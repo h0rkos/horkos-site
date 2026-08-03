@@ -252,6 +252,21 @@ h2 { font-size: 1.25rem; font-weight: 600; margin: 40px 0 12px; }
     margin-bottom: 6px;
 }
 .implications p { margin: 0; color: var(--text-muted); }
+/* The reviewed counterpart of .imp-draft. A reader should be able to tell at
+   a glance which notes a person actually read and which a rule produced, so
+   both states are labelled rather than only the machine one - an unlabelled
+   note would otherwise be ambiguous between "reviewed" and "not yet tagged". */
+.imp-reviewed {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    border: 1px solid var(--sig-minor);
+    border-radius: 3px;
+    font-size: 0.68rem;
+    color: var(--sig-minor);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
 .imp-draft {
     display: inline-block;
     margin-left: 8px;
@@ -766,3 +781,91 @@ footer p { margin: 0 0 8px; max-width: 78ch; }
 .js .tl-toolbar { display: flex; }
 .js .tl-canvas-wrap { display: block; }
 .js .tl-list { display: none; }
+
+/* --- open letter ------------------------------------------------------- */
+/* The letter is a single column of prose. It reuses .prose for measure and
+   paragraph rhythm, and adds only what prose lacks: headings below h2,
+   blockquotes, lists, a callout box, and the citation apparatus. */
+.ol-meta {
+    color: var(--text-faint);
+    font-size: 0.86rem;
+    margin: 0 0 28px;
+    max-width: 68ch;
+}
+.ol-meta strong { color: var(--text-muted); font-weight: 600; }
+
+.ol-note {
+    max-width: 68ch;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 0 0 32px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+.ol-note p { margin: 0 0 12px; }
+.ol-note p:last-child { margin: 0; }
+
+.prose h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 28px 0 10px;
+    color: var(--text);
+}
+.prose ul, .prose ol { margin: 0 0 18px; padding-left: 22px; }
+.prose li { margin: 0 0 10px; }
+.prose blockquote {
+    margin: 0 0 18px;
+    padding: 2px 0 2px 18px;
+    border-left: 2px solid var(--border);
+    color: var(--text-muted);
+    font-style: italic;
+}
+.prose blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--text-faint);
+}
+
+/* Scripture is set apart from the legal argument on purpose - it is an
+   appeal to the addressee's own stated standard, not a source of law. */
+.ol-scripture {
+    max-width: 68ch;
+    border-left: 2px solid var(--accent-dim);
+    padding: 2px 0 2px 18px;
+    margin: 0 0 18px;
+    color: var(--text-muted);
+}
+.ol-scripture cite {
+    display: block;
+    margin-top: 6px;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--text-faint);
+}
+
+/* Superscript citation markers. Kept as real links so the no-JS and
+   printed versions both resolve. */
+a.ol-ref {
+    font-size: 0.72em;
+    vertical-align: super;
+    line-height: 0;
+    padding: 0 1px;
+    text-decoration: none;
+}
+a.ol-ref::before { content: "["; }
+a.ol-ref::after  { content: "]"; }
+
+.ol-cites {
+    max-width: 78ch;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    padding-left: 24px;
+}
+.ol-cites li { margin: 0 0 10px; }
+.ol-cites li:target { background: var(--bg-inset); border-radius: 3px; }
+.ol-cites .ol-cite-note { color: var(--text-faint); }
